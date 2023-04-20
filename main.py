@@ -11,3 +11,6 @@ df = pd.merge(X, Y, on='ID', how='inner')
 print(df)
 
 null_indexes = np.where(pd.isnull(df))
+for x in null_indexes[0]:
+    for y in null_indexes[1]:
+        df[x][y] = 0
