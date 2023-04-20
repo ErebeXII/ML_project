@@ -11,6 +11,5 @@ df = pd.merge(X, Y, on='ID', how='inner')
 print(df)
 
 null_indexes = np.where(pd.isnull(df))
-for x in null_indexes[0]:
-    for y in null_indexes[1]:
-        df[x][y] = 0
+df.replace(to_replace=np.nan, value=0, inplace=True)
+print(df.drop(['ID', 'DAY_ID', 'COUNTRY'], axis=1).corr())
