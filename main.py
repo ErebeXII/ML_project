@@ -20,6 +20,9 @@ X = pd.read_csv('csv_files/Data_X.csv')
 Y = pd.read_csv('csv_files/Data_Y.csv')
 df = pd.merge(X, Y, on='ID', how='inner')
 
+# replace non numeric data
+df.replace(to_replace=["FR", "DE"], value=[0, 1], inplace=True)
+
 # fill null values
 df.fillna(0, inplace=True)
 
@@ -28,9 +31,6 @@ cols = [e for e in df.columns if e not in ('ID', 'DAY_ID', 'COUNTRY', 'TARGET')]
 print(df[cols].describe().transpose()[['mean', 'std', 'min', 'max']])
 df[cols] = StandardScaler().fit_transform(df[cols])
 print(df[cols].describe().transpose()[['mean', 'std', 'min', 'max']])
-
-# replace non numeric data
-df.replace(to_replace=["FR", "DE"], value=[0, 1], inplace=True)
 
 # drop highly correlated data
 """ not useful anymore for PCA
@@ -45,7 +45,7 @@ for i in range(len(corr_mat)):
 input_cols = [e for e in df.columns if e not in ('ID', 'DAY_ID', 'TARGET')]
 
 # split data for cross validation
-cv = KFold(n_splits=10, shuffle=True, random_state=random.randint(1, 100))
+cv = KFold(n_splits=10, shuffle=True, random_state=42)
 
 
 # get the best number of components for PCA
