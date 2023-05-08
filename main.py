@@ -44,7 +44,7 @@ for i in range(len(corr_mat)):
 input_cols = [e for e in df.columns if e not in ('ID', 'DAY_ID', 'TARGET')]
 
 # split data for cross validation
-cv = KFold(n_splits=10, shuffle=True, random_state=random.randint(1, 100))
+cv = KFold(n_splits=10, shuffle=True, random_state=42)
 cvs = []
 for i in range(100):
     cvs.append(KFold(n_splits=10, shuffle=True, random_state=random.randint(1, 1000)))
