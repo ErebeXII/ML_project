@@ -89,13 +89,13 @@ for key in dfs:
 # optimize the hyperparameter of the models
 def optimize_hyperparameter(country):
     y = []
-    for i in range(1, len(input_cols[country]) + 1):
-        model = DecisionTreeRegressor(max_depth=i, max_leaf_nodes=30)
+    for i in range(1, 100):
+        model = Ridge(i)
         y_predict = cross_val_predict(model, dfs[country][input_cols[country]], dfs[country]["TARGET"], cv=cv)
         y_test = dfs[country]["TARGET"].values
         y.append(spearmanr(y_test, y_predict).correlation)
         print(i)
-    plt.plot(range(1, len(input_cols[country]) + 1), y, '-o')
+    plt.plot(range(1, 100), y, '-o')
     plt.show()
 
 
