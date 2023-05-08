@@ -115,10 +115,9 @@ print("K-neighbors regression:")
 test_model(KNeighborsRegressor(72), reg_cols)
 print("Decision tree regression:")
 test_model(DecisionTreeRegressor(max_depth=8), input_cols)
-"""
 print("Random forest regression:")
 test_model(RandomForestRegressor(max_depth=8, n_estimators=100), input_cols)
-"""
+
 
 # get and clean the validation data
 df_test = pd.read_csv('csv_files/DataNew_X.csv')
